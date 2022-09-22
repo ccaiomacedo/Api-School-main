@@ -9,7 +9,6 @@ import static br.com.alura.school.user.UserRole.STUDENT;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
-@Table(name = "tb_user")
 class User {
 
     @Id
