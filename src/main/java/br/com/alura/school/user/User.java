@@ -9,13 +9,13 @@ import static br.com.alura.school.user.UserRole.STUDENT;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
-class User {
+public class User {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-    @Size(max=20)
+    @Size(max = 20)
     @NotBlank
     @Column(nullable = false, unique = true)
     private String username;
@@ -29,19 +29,23 @@ class User {
     private UserRole role = STUDENT;
 
     @Deprecated
-    protected User() {}
+    protected User() {
+    }
 
-    User(String username, String email) {
+    public User(String username, String email) {
         this.username = username;
         this.email = email;
     }
 
-    String getUsername() {
+    public String getUsername() {
         return username;
     }
 
-    String getEmail() {
+    public String getEmail() {
         return email;
     }
 
+    public UserRole getRole() {
+        return role;
+    }
 }

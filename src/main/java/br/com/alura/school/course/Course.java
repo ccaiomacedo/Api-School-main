@@ -1,52 +1,64 @@
 package br.com.alura.school.course;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import br.com.alura.school.section.Section;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
-class Course {
+public class Course implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-    @Size(max=10)
+    @Size(max = 10)
     @NotBlank
     @Column(nullable = false, unique = true)
     private String code;
 
-    @Size(max=20)
+    @Size(max = 20)
     @NotBlank
     @Column(nullable = false, unique = true)
     private String name;
 
     private String description;
 
-    @Deprecated
-    protected Course() { }
+    @OneToMany(mappedBy = "course")
+    private Set<Section> sections = new HashSet<>();
 
-    Course(String code, String name, String description) {
+    @Deprecated
+    protected Course() {
+    }
+
+    public Course(String code, String name, String description) {
         this.code = code;
         this.name = name;
         this.description = description;
     }
 
-    String getCode() {
+    public String getCode() {
         return code;
     }
 
-    String getName() {
+    public String getName() {
         return name;
     }
 
-    String getDescription() {
+    public String getDescription() {
         return description;
     }
 
+    public Set<Section> getSections() {
+        return sections;
+    }
 }
