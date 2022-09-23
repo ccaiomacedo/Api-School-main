@@ -24,17 +24,12 @@ public class SectionService {
     }
 
     public NewSectionRequest insert(String code, NewSectionRequest newSectionRequest) {
-        try {
             Section section = new Section();
             copyDtoToEntity(newSectionRequest, section);
             Course course = courseRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Course not found"));
             section.setCourse(course);
             section = sectionRepository.save(section);
             return newSectionRequest = new NewSectionRequest(section);
-        } catch (DataIntegrityViolationException e) {
-            throw new DatabaseException("Integrity violation");
-        }
-
     }
 
 

@@ -1,6 +1,5 @@
 package br.com.alura.school.section;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,12 +17,12 @@ public class SectionController {
 
     private final SectionService sectionService;
 
-    public SectionController(SectionService sectionService) {
+    SectionController(SectionService sectionService) {
         this.sectionService = sectionService;
     }
 
     @PostMapping(value = "/courses/{code}/sections")
-    public ResponseEntity<NewSectionRequest> newSection(@PathVariable String code, @RequestBody @Valid NewSectionRequest newSectionRequest) {
+    ResponseEntity<NewSectionRequest> newSection(@PathVariable String code, @RequestBody @Valid NewSectionRequest newSectionRequest) {
         newSectionRequest = sectionService.insert(code, newSectionRequest);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newSectionRequest.getId()).toUri();
         return ResponseEntity.created(uri).body(newSectionRequest);

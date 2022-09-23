@@ -34,7 +34,7 @@ public class Section implements Serializable {
     @ManyToOne()
     private Course course;
 
-    @OneToMany()
+    @OneToMany(mappedBy = "section")
     private Set<Video> videos = new HashSet<>();
 
     public Section() {

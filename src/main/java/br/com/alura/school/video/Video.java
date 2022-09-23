@@ -1,8 +1,11 @@
 package br.com.alura.school.video;
 
+import br.com.alura.school.section.Section;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -17,9 +20,13 @@ public class Video implements Serializable {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
+
     private String video;
 
-    public Video(){
+    @ManyToOne()
+    private Section section;
+
+    public Video() {
 
     }
 
@@ -42,6 +49,18 @@ public class Video implements Serializable {
 
     public void setVideo(String video) {
         this.video = video;
+    }
+
+    public Section getSection() {
+        return section;
+    }
+
+    public void setSection(Section section) {
+        this.section = section;
+    }
+
+    public void addSection(Video video) {
+        section.getVideos().add(video);
     }
 
     @Override
