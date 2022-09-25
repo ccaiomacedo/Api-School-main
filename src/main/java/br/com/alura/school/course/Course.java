@@ -1,7 +1,6 @@
 package br.com.alura.school.course;
 
 import br.com.alura.school.section.Section;
-import br.com.alura.school.video.Video;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;

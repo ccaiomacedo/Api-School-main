@@ -2,10 +2,7 @@ package br.com.alura.school.video;
 
 import br.com.alura.school.section.Section;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -21,6 +18,7 @@ public class Video implements Serializable {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
+    @Column(nullable = false, unique = true)
     private String video;
 
     @ManyToOne()

@@ -2,6 +2,7 @@ package br.com.alura.school.exceptions.resource;
 
 import br.com.alura.school.exceptions.DatabaseException;
 import br.com.alura.school.exceptions.ResourceNotFoundException;
+import br.com.alura.school.exceptions.UserAlreadyEnrolledInTheCourseException;
 import br.com.alura.school.exceptions.UserRoleValidationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -47,6 +48,17 @@ public class ResourceExceptionHandler {
         err.setTimeStamp(Instant.now());
         err.setStatus(status.value());
         err.setError("Database exception");
+        err.setMessage(e.getMessage());
+        err.setPath(request.getRequestURI());
+        return ResponseEntity.status(status).body(err);
+    }
+    @ExceptionHandler(UserAlreadyEnrolledInTheCourseException.class)
+    public ResponseEntity<StandardError> userEnrollmentValidation(UserAlreadyEnrolledInTheCourseException e, HttpServletRequest request) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        StandardError err = new StandardError();
+        err.setTimeStamp(Instant.now());
+        err.setStatus(status.value());
+        err.setError("User enrollment exception");
         err.setMessage(e.getMessage());
         err.setPath(request.getRequestURI());
         return ResponseEntity.status(status).body(err);

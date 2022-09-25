@@ -12,7 +12,6 @@ public class NewVideoRequest implements Serializable {
     private Long id;
 
     @NotBlank(message = "Required field")
-
     @Unique(entity = Video.class, field = "video")
     private String video;
 

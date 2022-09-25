@@ -5,6 +5,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import static br.com.alura.school.user.UserRole.INSTRUCTOR;
 import static br.com.alura.school.user.UserRole.STUDENT;
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -45,7 +46,15 @@ public class User {
         return email;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public UserRole getRole() {
         return role;
+    }
+
+    public boolean isInstructor() {
+        return INSTRUCTOR.equals(this.role);
     }
 }
