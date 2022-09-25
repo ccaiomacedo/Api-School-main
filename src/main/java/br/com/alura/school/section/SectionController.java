@@ -1,14 +1,12 @@
 package br.com.alura.school.section;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.List;
 
 
 @RestController
@@ -16,9 +14,11 @@ public class SectionController {
 
 
     private final SectionService sectionService;
+    private final SectionRepository sectionRepository;
 
-    SectionController(SectionService sectionService) {
+    public SectionController(SectionService sectionService, SectionRepository sectionRepository) {
         this.sectionService = sectionService;
+        this.sectionRepository = sectionRepository;
     }
 
     @PostMapping(value = "/courses/{code}/sections")
@@ -28,5 +28,13 @@ public class SectionController {
         return ResponseEntity.created(uri).body(newSectionRequest);
     }
 
+    @GetMapping(value = "/sectionByVideosReport")
+    ResponseEntity sectionReport() {
+        List<SectionReportResponse> sectionReportResponseList = sectionRepository.generateReport();
+        if (sectionReportResponseList.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok().body(sectionReportResponseList);
+    }
 
 }

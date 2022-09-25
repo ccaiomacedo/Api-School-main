@@ -5,13 +5,16 @@ import br.com.alura.school.user.User;
 
 import javax.persistence.*;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
-public class Enrollment {
+public class Enrollment implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
 
     @Id

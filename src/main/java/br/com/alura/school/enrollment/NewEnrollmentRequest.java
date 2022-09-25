@@ -2,8 +2,11 @@ package br.com.alura.school.enrollment;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
-public class NewEnrollmentRequest {
+public class NewEnrollmentRequest implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private Long id;
     private String courseCode;
