@@ -2,7 +2,7 @@ package br.com.alura.school.exceptions.resource;
 
 import java.io.Serializable;
 
-public class FieldMessage implements Serializable { 
+public class FieldMessage implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -10,7 +10,7 @@ public class FieldMessage implements Serializable {
     private String message;
 
 
-    public FieldMessage(){
+    public FieldMessage() {
 
     }
 

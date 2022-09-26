@@ -52,6 +52,7 @@ public class ResourceExceptionHandler {
         err.setPath(request.getRequestURI());
         return ResponseEntity.status(status).body(err);
     }
+
     @ExceptionHandler(UserAlreadyEnrolledInTheCourseException.class)
     public ResponseEntity<StandardError> userEnrollmentValidation(UserAlreadyEnrolledInTheCourseException e, HttpServletRequest request) {
         HttpStatus status = HttpStatus.BAD_REQUEST;
@@ -66,7 +67,7 @@ public class ResourceExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ValidationError> validation(MethodArgumentNotValidException e, HttpServletRequest request) {
-        HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
+        HttpStatus status = HttpStatus.BAD_REQUEST;
         ValidationError err = new ValidationError();
         err.setTimeStamp(Instant.now());
         err.setStatus(status.value());

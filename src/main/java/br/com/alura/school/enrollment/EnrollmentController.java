@@ -31,13 +31,12 @@ public class EnrollmentController {
 
     @PostMapping(value = "/courses/{courseCode}/enroll")
     ResponseEntity<NewEnrollmentRequest> newEnrollment(@RequestBody @Valid NewEnrollmentRequest newEnrollmentRequest, @PathVariable String courseCode) {
-        Enrollment enrollment = new Enrollment();
         User user = userRepository.findByUsername(newEnrollmentRequest.getUsername()).orElseThrow(() -> new ResourceNotFoundException("User not found"));
         Course course = courseRepository.findByCode(courseCode).orElseThrow(() -> new ResourceNotFoundException("Course not found"));
-        enrollment.setCourse(course);
-        enrollment.setUser(user);
+        Enrollment enrollment = new Enrollment(course, user);
+
         if (EnrollmentValidator.isAlreadyEnrolled(user, course)) {
-            throw new UserAlreadyEnrolledInTheCourseException("User " + user.getUsername() + " is already enrolled in course with code" + courseCode);
+            throw new UserAlreadyEnrolledInTheCourseException("User " + user.getUsername() + " is already enrolled in course with code " + courseCode);
         }
         enrollment = enrollmentRepository.save(enrollment);
         newEnrollmentRequest = new NewEnrollmentRequest(enrollment);

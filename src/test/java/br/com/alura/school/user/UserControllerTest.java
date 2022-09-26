@@ -33,7 +33,7 @@ class UserControllerTest {
         userRepository.save(new User("ana", "ana@email.com"));
 
         mockMvc.perform(get("/users/ana")
-                .accept(MediaType.APPLICATION_JSON))
+                        .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.username", is("ana")))
@@ -43,7 +43,7 @@ class UserControllerTest {
     @Test
     void not_found_when_user_does_not_exist() throws Exception {
         mockMvc.perform(get("/users/non-existent")
-                .accept(MediaType.APPLICATION_JSON))
+                        .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
     }
 
@@ -52,10 +52,10 @@ class UserControllerTest {
         NewUserRequest newUser = new NewUserRequest("alex", "alex@email.com");
 
         mockMvc.perform(post("/users")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(jsonMapper.writeValueAsString(newUser)))
-        .andExpect(status().isCreated())
-        .andExpect(header().string("Location", "/users/alex"));
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonMapper.writeValueAsString(newUser)))
+                .andExpect(status().isCreated())
+                .andExpect(header().string("Location", "/users/alex"));
     }
 
     @ParameterizedTest
@@ -73,8 +73,8 @@ class UserControllerTest {
         NewUserRequest newUser = new NewUserRequest(username, email);
 
         mockMvc.perform(post("/users")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(jsonMapper.writeValueAsString(newUser)))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonMapper.writeValueAsString(newUser)))
                 .andExpect(status().isBadRequest());
     }
 
@@ -85,8 +85,8 @@ class UserControllerTest {
         NewUserRequest newUser = new NewUserRequest("maria", "mary@alura.com.br");
 
         mockMvc.perform(post("/users")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(jsonMapper.writeValueAsString(newUser)))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonMapper.writeValueAsString(newUser)))
                 .andDo(print())
                 .andExpect(status().isBadRequest());
     }
@@ -98,8 +98,8 @@ class UserControllerTest {
         NewUserRequest newUser = new NewUserRequest("joao", "john@email.com");
 
         mockMvc.perform(post("/users")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(jsonMapper.writeValueAsString(newUser)))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonMapper.writeValueAsString(newUser)))
                 .andDo(print())
                 .andExpect(status().isBadRequest());
     }

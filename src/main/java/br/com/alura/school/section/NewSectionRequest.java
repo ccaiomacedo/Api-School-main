@@ -64,19 +64,8 @@ public class NewSectionRequest implements Serializable {
         this.code = code;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public void setAuthorUsername(String authorUsername) {
         this.authorUsername = authorUsername;
     }
 
-    public String getCourseCode() {
-        return courseCode;
-    }
-
-    public void setCourseCode(String courseCode) {
-        this.courseCode = courseCode;
-    }
 }

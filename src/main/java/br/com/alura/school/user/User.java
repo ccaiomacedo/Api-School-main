@@ -38,6 +38,12 @@ public class User {
         this.email = email;
     }
 
+    public User(String username, String email, UserRole role) {
+        this.username = username;
+        this.email = email;
+        this.role = role;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -50,8 +56,8 @@ public class User {
         return id;
     }
 
-    public UserRole getRole() {
-        return role;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public boolean isInstructor() {

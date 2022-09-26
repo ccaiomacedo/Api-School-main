@@ -30,12 +30,12 @@ public class Enrollment implements Serializable {
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant date;
 
+    @Deprecated
     public Enrollment() {
 
     }
 
-    public Enrollment(Long id, Course course, User user) {
-        this.id = id;
+    public Enrollment(Course course, User user) {
         this.course = course;
         this.user = user;
     }
@@ -62,14 +62,6 @@ public class Enrollment implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public Instant getDate() {
-        return date;
-    }
-
-    public void setDate(Instant date) {
-        this.date = date;
     }
 
     @Override

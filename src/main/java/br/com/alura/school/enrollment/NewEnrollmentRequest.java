@@ -14,10 +14,6 @@ public class NewEnrollmentRequest implements Serializable {
     @NotBlank(message = "Required field")
     private String username;
 
-    public NewEnrollmentRequest(){
-
-    }
-
     public NewEnrollmentRequest(Long id, String courseCode, String username) {
         this.id = id;
         this.courseCode = courseCode;
@@ -36,14 +32,6 @@ public class NewEnrollmentRequest implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getCourseCode() {
-        return courseCode;
-    }
-
-    public void setCourseCode(String courseCode) {
-        this.courseCode = courseCode;
     }
 
     public String getUsername() {

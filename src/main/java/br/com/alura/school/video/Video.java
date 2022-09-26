@@ -24,13 +24,14 @@ public class Video implements Serializable {
     @ManyToOne()
     private Section section;
 
+    @Deprecated
     public Video() {
 
     }
 
-    public Video(Long id, String video) {
-        this.id = id;
+    public Video(String video, Section section) {
         this.video = video;
+        this.section = section;
     }
 
     public Long getId() {
@@ -57,9 +58,6 @@ public class Video implements Serializable {
         this.section = section;
     }
 
-    public void addSection(Video video) {
-        section.getVideos().add(video);
-    }
 
     @Override
     public boolean equals(Object o) {

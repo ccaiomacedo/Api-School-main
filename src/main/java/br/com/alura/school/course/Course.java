@@ -46,6 +46,14 @@ public class Course implements Serializable {
         this.description = description;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getCode() {
         return code;
     }
@@ -56,9 +64,5 @@ public class Course implements Serializable {
 
     public String getDescription() {
         return description;
-    }
-
-    public Set<Section> getSections() {
-        return sections;
     }
 }

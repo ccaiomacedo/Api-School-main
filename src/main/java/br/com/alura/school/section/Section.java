@@ -37,12 +37,12 @@ public class Section implements Serializable {
     @OneToMany(mappedBy = "section")
     private Set<Video> videos = new HashSet<>();
 
+    @Deprecated
     public Section() {
 
     }
 
-    public Section(Long id, String code, String title, User authorUsername, Course course) {
-        this.id = id;
+    public Section(String code, String title, User authorUsername, Course course) {
         this.code = code;
         this.title = title;
         this.authorUsername = authorUsername;
@@ -73,10 +73,6 @@ public class Section implements Serializable {
         this.title = title;
     }
 
-    public Set<Video> getVideos() {
-        return videos;
-    }
-
     public User getAuthorUsername() {
         return authorUsername;
     }
@@ -92,6 +88,7 @@ public class Section implements Serializable {
     public void setCourse(Course course) {
         this.course = course;
     }
+
 
     @Override
     public boolean equals(Object o) {

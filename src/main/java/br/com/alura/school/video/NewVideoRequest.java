@@ -41,15 +41,4 @@ public class NewVideoRequest implements Serializable {
         return video;
     }
 
-    public void setVideo(String video) {
-        this.video = video;
-    }
-
-    public String getSectionCode() {
-        return sectionCode;
-    }
-
-    public void setSectionCode(String sectionCode) {
-        this.sectionCode = sectionCode;
-    }
 }
