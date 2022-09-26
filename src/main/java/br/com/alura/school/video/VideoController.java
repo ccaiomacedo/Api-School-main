@@ -38,7 +38,7 @@ public class VideoController {
             throw new ResourceNotFoundException("Section not found for course " + courseCode);
         }
         Section section = sectionRepository.findByCode(sectionCode).orElseThrow(() -> new ResourceNotFoundException("Section not found"));
-        Video video = new Video(null, section);
+        Video video = new Video(section);
         copyDtoToEntity(newVideoRequest, video);
 
         video = videoRepository.save(video);

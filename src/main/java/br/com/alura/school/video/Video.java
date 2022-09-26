@@ -29,6 +29,10 @@ public class Video implements Serializable {
 
     }
 
+    public Video(Section section) {
+        this.section = section;
+    }
+
     public Video(String video, Section section) {
         this.video = video;
         this.section = section;

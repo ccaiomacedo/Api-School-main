@@ -42,6 +42,10 @@ public class Section implements Serializable {
 
     }
 
+    public Section(Course course) {
+        this.course = course;
+    }
+
     public Section(String code, String title, User authorUsername, Course course) {
         this.code = code;
         this.title = title;

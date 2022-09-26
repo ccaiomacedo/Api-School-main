@@ -84,4 +84,11 @@ public class SectionRepositoryTest {
 
         Assertions.assertTrue(section.isEmpty());
     }
+
+    @Test
+    void generate_report_should_Return_object() {
+        List<SectionReportResponse> sectionReportResponse = sectionRepository.generateReport();
+
+        Assertions.assertTrue(sectionReportResponse.isEmpty());
+    }
 }

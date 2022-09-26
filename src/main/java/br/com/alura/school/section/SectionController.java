@@ -32,7 +32,7 @@ public class SectionController {
     @PostMapping(value = "/courses/{code}/sections")
     ResponseEntity<NewSectionRequest> newSection(@PathVariable String code, @RequestBody @Valid NewSectionRequest newSectionRequest) {
         Course course = courseRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Course not found"));
-        Section section = new Section(null, null, null, course);
+        Section section = new Section(course);
         copyDtoToEntity(newSectionRequest, section);
 
         section = sectionRepository.save(section);
