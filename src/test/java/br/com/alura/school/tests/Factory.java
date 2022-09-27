@@ -8,7 +8,6 @@ import br.com.alura.school.section.Section;
 import br.com.alura.school.user.User;
 import br.com.alura.school.user.UserRole;
 import br.com.alura.school.video.NewVideoRequest;
-import br.com.alura.school.video.Video;
 
 
 public class Factory {
@@ -38,10 +37,6 @@ public class Factory {
 
     public static Enrollment createEnrollment() {
         return new Enrollment(createCourse(), createUser());
-    }
-
-    public static Video createVideo() {
-        return new Video("https://www.youtube.com/watch?v=gI4-vj0WpK", createSection());
     }
 
     public static NewSectionRequest createNewSectionRequest() {

@@ -9,6 +9,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -18,6 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@Transactional
 class UserControllerTest {
 
     private final ObjectMapper jsonMapper = new ObjectMapper();
@@ -102,5 +104,30 @@ class UserControllerTest {
                         .content(jsonMapper.writeValueAsString(newUser)))
                 .andDo(print())
                 .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void should_return_bad_request_if_username_is_null() throws Exception {
+        NewUserRequest newUser = new NewUserRequest("", "alex@email.com");
+
+        mockMvc.perform(post("/users")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonMapper.writeValueAsString(newUser)))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.errors.[0].fieldName", is("username")))
+                .andExpect(jsonPath("$.errors.[0].message", is("must not be blank")));
+
+    }
+
+    @Test
+    void should_return_bad_request_if_email_is_null() throws Exception {
+        NewUserRequest newUser = new NewUserRequest("alex", "");
+
+        mockMvc.perform(post("/users")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonMapper.writeValueAsString(newUser)))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.errors.[0].fieldName", is("email")))
+                .andExpect(jsonPath("$.errors.[0].message", is("must not be blank")));
     }
 }

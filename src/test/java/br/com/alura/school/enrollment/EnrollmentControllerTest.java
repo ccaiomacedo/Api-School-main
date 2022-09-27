@@ -111,4 +111,57 @@ public class EnrollmentControllerTest {
         result.andExpect(status().isBadRequest());
         result.andExpect(jsonPath("$.message", is("User alex is already enrolled in course with code " + course.getCode())));
     }
+
+    @Test
+    void should_return_bad_request_if_username_is_null() throws Exception {
+
+        Course course = courseRepository.save(Factory.createCourse());
+        NewEnrollmentRequest newEnrollmentRequest = new NewEnrollmentRequest(1L, "java-2", "");
+
+        String jsonBody = jsonMapper.writeValueAsString(newEnrollmentRequest);
+
+        ResultActions result = mockMvc.perform(post("/courses/{courseCode}/enroll", course.getCode())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(jsonBody).accept(MediaType.APPLICATION_JSON));
+
+        result.andExpect(status().isBadRequest());
+        result.andExpect(jsonPath("$.errors.[0].fieldName", is("username")));
+        result.andExpect(jsonPath("$.errors.[0].message", is("Required field")));
+        result.andExpect(jsonPath("$.errors.[1].fieldName", is("username")));
+        result.andExpect(jsonPath("$.errors.[1].message", is("username must contain betwen 3 and 20 characters")));
+    }
+
+    @Test
+    void should_return_bad_request_if_username_is_less_than_3_characters() throws Exception {
+
+        Course course = courseRepository.save(Factory.createCourse());
+        NewEnrollmentRequest newEnrollmentRequest = new NewEnrollmentRequest(1L, "java-2", "al");
+
+        String jsonBody = jsonMapper.writeValueAsString(newEnrollmentRequest);
+
+        ResultActions result = mockMvc.perform(post("/courses/{courseCode}/enroll", course.getCode())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(jsonBody).accept(MediaType.APPLICATION_JSON));
+
+        result.andExpect(status().isBadRequest());
+        result.andExpect(jsonPath("$.errors.[0].fieldName", is("username")));
+        result.andExpect(jsonPath("$.errors.[0].message", is("username must contain betwen 3 and 20 characters")));
+    }
+
+    @Test
+    void should_return_bad_request_if_username_is_greater_than_20_characters() throws Exception {
+
+        Course course = courseRepository.save(Factory.createCourse());
+        NewEnrollmentRequest newEnrollmentRequest = new NewEnrollmentRequest(1L, "java-2", "alex1234567891011121314151617");
+
+        String jsonBody = jsonMapper.writeValueAsString(newEnrollmentRequest);
+
+        ResultActions result = mockMvc.perform(post("/courses/{courseCode}/enroll", course.getCode())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(jsonBody).accept(MediaType.APPLICATION_JSON));
+
+        result.andExpect(status().isBadRequest());
+        result.andExpect(jsonPath("$.errors.[0].fieldName", is("username")));
+        result.andExpect(jsonPath("$.errors.[0].message", is("username must contain betwen 3 and 20 characters")));
+    }
 }
