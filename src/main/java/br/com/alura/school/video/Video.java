@@ -75,4 +75,12 @@ public class Video implements Serializable {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+    @Override
+    public String toString() {
+        return "Video{" +
+                "id=" + id +
+                ", video='" + video +
+                '}';
+    }
 }

@@ -93,6 +93,9 @@ public class Section implements Serializable {
         this.course = course;
     }
 
+    public Set<Video> getVideos() {
+        return videos;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -105,5 +108,16 @@ public class Section implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Section{" +
+                "id=" + id +
+                ", code='" + code + '\'' +
+                ", title='" + title + '\'' +
+                ", authorUsername=" + authorUsername +
+                ", videos=" + videos +
+                '}';
     }
 }

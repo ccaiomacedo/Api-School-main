@@ -65,4 +65,8 @@ public class Course implements Serializable {
     public String getDescription() {
         return description;
     }
+
+    public Set<Section> getSections() {
+        return sections;
+    }
 }
