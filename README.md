@@ -27,6 +27,9 @@ Esta é uma API que tem o objetivo de gerenciar usuários, cursos, matrículas, 
 - `POST /courses` adiciona um novo curso
 - `GET /courses/{code}` obtém os detalhes de um curso
 
+## POSTMAN
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://www.postman.com/collections/50752df876090e4280d6)
+
 ## Avaliação
 Avaliaremos seu desafio de código com base em alguns atributos de qualidade do sistema. Alguns consideramos obrigatórios, como a correção, e serão avaliados em uma abordagem binária (funciona/segue ou não). Estes são todos os atributos de qualidade que esperamos que você aborde:
 
